@@ -32,10 +32,10 @@ def evaluate_random_function(f, x, y):
         -0.5
         >>> evaluate_random_function(["y"],0.1,0.02)
         0.02
+        >>> evaluate_random_function(["x+2*y"],0.2,0.3)
+        0.8
     """
-    # TODO: implement this
-    pass
-
+    return eval(f[0])
 
 def remap_interval(val,
                    input_interval_start,
