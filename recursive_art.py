@@ -1,4 +1,10 @@
-""" TODO: Put your header comment here """
+"""
+@author: Sungwoo Park
+
+Computational art program
+
+This python program generates an image based on randomly composed mathematical functions.
+"""
 
 import random
 import math
@@ -16,9 +22,18 @@ def build_random_function(min_depth, max_depth):
                  (see assignment writeup for details on the representation of
                  these functions)
     """
-    # TODO: implement this
-    pass
-
+    one_arg_functions = ['cos_pi','sin_pi','square']
+    two_arg_functions = ['prod','avg','neg_prod']
+    if min_depth == 0:
+        if random.random() < 0.5: #~50% chance each for x or y
+            return ['x']
+        else:
+            return ['y']
+    random_index = random.randrange(3)
+    if random.random() < 0.5: #~50% chance each for one or two args
+        return [one_arg_functions[random_index],build_random_function(min_depth-1,max_depth-1)]
+    else:
+        return [two_arg_functions[random_index],build_random_function(min_depth-1,max_depth-1),build_random_function(min_depth-1,max_depth-1)]
 
 def evaluate_random_function(f, x, y):
     """ Evaluate the random function f with inputs x,y
@@ -165,14 +180,10 @@ def generate_art(filename, x_size=350, y_size=350):
 
 if __name__ == '__main__':
     import doctest
-    doctest.testmod(verbose=True)
+    #doctest.testmod(verbose=True)
 
-
-    # Create some computational art!
-    # TODO: Un-comment the generate_art function call after you
-    #       implement remap_interval and evaluate_random_function
-    #generate_art("myart.png")
+    generate_art("example1.png")
+    generate_art("example2.png")
 
     # Test that PIL is installed correctly
-    # TODO: Comment or remove this function call after testing PIL install
     #test_image("noise.png")
